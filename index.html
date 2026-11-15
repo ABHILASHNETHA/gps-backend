@@ -148,7 +148,7 @@
       const statusText = document.getElementById('statusText');
       try {
         const today = new Date().toISOString().split('T')[0];
-        const res = await fetch(`${BACKEND_URL}/api/locations/logs?deviceId=${DEVICE_ID}&date=${today}`);
+        const res = await fetch(`${BACKEND_URL}/api/locations/sync`);
         const data = await res.json();
         if (!data || data.length === 0) {
           statusDot.style.background = "#eab308";
