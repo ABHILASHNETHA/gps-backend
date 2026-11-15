@@ -53,6 +53,14 @@ app.get('/api/locations/logs', async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch logs' });
   }
 });
-
+app.get('/api/locations/devices', async (req, res) => {
+  try {
+    const r = await pool.query('SELECT DISTINCT device_id FROM locations ORDER BY device_id');
+    res.json(r.rows.map(x => x.device_id));
+  } catch (err) {
+    console.error("Device list failed:", err);
+    res.status(500).json({ error: 'Failed to fetch devices' });
+  }
+});
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`GPS Backend server running on port ${PORT}`));
